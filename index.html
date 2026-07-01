@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sylvester Ng Jun Hong | Portfolio</title>
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #090d16;
+            --surface-color: #111827;
+            --surface-accent: #1f2937;
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-color: #38bdf8;
+            --radial-glow: rgba(56, 189, 248, 0.06);
+            --nav-bg: linear-gradient(to bottom, rgba(9,13,22,0.95), rgba(9,13,22,0));
+            --nav-mobile-bg: rgba(9, 13, 22, 0.95);
+            --sidebar-bg: rgba(17, 24, 39, 0.8);
+            --badge-bg: rgba(255, 255, 255, 0.03);
+            --badge-border: rgba(255, 255, 255, 0.08);
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f8fafc; 
+            --surface-color: #ffffff; 
+            --surface-accent: #e2e8f0;
+            --text-primary: #0f172a; 
+            --text-secondary: #475569;
+            --accent-color: #0284c7;
+            --radial-glow: rgba(2, 132, 199, 0.04);
+            --nav-bg: linear-gradient(to bottom, rgba(248, 250, 252, 0.95), rgba(248, 250, 252, 0));
+            --nav-mobile-bg: rgba(248, 250, 252, 0.95);
+            --sidebar-bg: rgba(255, 255, 255, 0.85);
+            --badge-bg: rgba(15, 23, 42, 0.04);
+            --badge-border: rgba(15, 23, 42, 0.08);
+        }
+
+        body {
+            background: radial-gradient(circle at 80% 20%, var(--radial-glow) 0%, var(--bg-color) 65%) fixed;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface-accent);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-color);
+        }
+
+        /* --- NAVIGATION LAYOUTS --- */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1050;
+            transition: var(--transition-smooth);
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+        }
+        .top-nav.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .sidebar-nav {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%) translateX(-150px);
+            z-index: 1040;
+            transition: var(--transition-smooth);
+            opacity: 0;
+            pointer-events: none;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--badge-border);
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+        }
+        .sidebar-nav.visible {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .sidebar-nav .nav-link {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sidebar-nav .nav-link:hover, .sidebar-nav .nav-link.active {
+            color: var(--accent-color);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        /* --- SMARTPHONE PRODUCT PAGE ANIMATIONS --- */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(60px);
+            filter: blur(4px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                        transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1),
+                        filter 0.8s ease;
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+
+        /* --- CORE SECTIONS --- */
+        section {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            padding: 75px 0;
+            position: relative;
+        }
+
+        /* Accent Elements */
+        .text-accent {
+            color: var(--accent-color);
+        }
+        .text-secondary-custom {
+            color: var(--text-secondary);
+        }
+        .text-secondary-custom {
+            color: var(--text-secondary);
+            transition: var(--transition-smooth); 
+        }
+        .text-secondary-custom:hover {
+            color: var(--accent-color) !important;
+            transform: translateY(-2px);
+        }
+        .custom-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            border-radius: 16px;
+            padding: 2rem;
+            height: 100%;
+            transition: var(--transition-smooth);
+        }
+        .custom-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Timeline Graphics */
+        .timeline-container {
+            border-left: 2px solid var(--surface-accent);
+            padding-left: 20px;
+            position: relative;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            border: 3px solid var(--bg-color);
+            transition: border-color 0.4s ease;
+        }
+
+        /* Custom Adaptive Badges */
+        .portfolio-badge {
+            background: var(--surface-accent);
+            color: var(--text-primary);
+            border: 1px solid var(--badge-border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .skill-badge {
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 0.3rem;
+            transition: var(--transition-smooth);
+        }
+        .skill-badge:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Lang Card Blocks */
+        .lang-card {
+            padding: 1rem;
+            border-radius: 8px;
+            background: var(--surface-color);
+            border: 1px solid var(--badge-border);
+        }
+
+        /* Theme Toggle Control Button Styling */
+        .theme-btn {
+            background: none;
+            border: 1px solid var(--badge-border);
+            color: var(--text-primary);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+        .theme-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        /* Responsive Optimization Controls */
+        @media (max-width: 991.98px) {
+            .sidebar-nav {
+                display: none !important;
+            }
+            .top-nav.hidden {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+                background: var(--nav-mobile-bg);
+            }
+            section {
+                min-height: auto;
+                padding: 45px 0;
+            }
+        }
+
+        /* Core Fix: Prevents mobile layout overlapping beneath floating top nav */
+        @media (max-width: 1199.98px) {
+            #hero {
+                padding-top: 130px !important;
+                align-items: flex-start;
+                min-height: auto;
+            }
+        }
+
+        @media (min-width: 1200px) and (min-aspect-ratio: 16/10) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER UTILITY BAR -->
+    <nav class="top-nav px-2 py-3" id="topNav">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span class="fw-bold tracking-widest text-uppercase text-accent" style="font-size: 1.1rem;">SN.</span>
+            <div class="d-none d-lg-flex gap-4">
+                <a href="#education" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Education</a>
+                <a href="#experience" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Experience</a>
+                <a href="#projects" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Projects</a>
+                <a href="#skills" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Skills</a>
+            </div>
+            
+            <div class="d-flex align-items-center gap-3">
+                <!-- Theme Toggle Button Layout -->
+                <button class="theme-btn" id="themeToggle" aria-label="Toggle structural light and dark themes">
+                    <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+                </button>
+                
+                <a href="resume.pdf" download class="btn btn-outline-info btn-sm rounded-pill px-4" style="border-color: var(--accent-color); color: var(--accent-color);">
+                    <i class="bi bi-download me-2"></i>CV / Resume
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDEBAR -->
+    <nav class="sidebar-nav" id="sidebarNav">
+        <div class="nav flex-column pair-nav-pills">
+            <a class="nav-link" href="#hero"><i class="bi bi-house-door"></i> <span>Intro</span></a>
+            <a class="nav-link" href="#education"><i class="bi bi-mortarboard"></i> <span>Education</span></a>
+            <a class="nav-link" href="#experience"><i class="bi bi-briefcase"></i> <span>Experience</span></a>
+            <a class="nav-link" href="#projects"><i class="bi bi-code-slash"></i> <span>Projects</span></a>
+            <a class="nav-link" href="#skills"><i class="bi bi-gear"></i> <span>Skills</span></a>
+        </div>
+    </nav>
+
+    <!-- MAIN WRAPPER -->
+    <main class="container px-4 px-md-5">
+
+        <!-- SECTION 1: MINIMALIST INTRO (HERO) -->
+        <section id="hero">
+            <div class="row w-100 align-items-center">
+                <div class="col-lg-8 reveal-element active">
+                    <p class="text-accent tracking-widest text-uppercase fw-semibold mb-2" style="font-size:0.9rem;">Available For Internship</p>
+                    <h1 class="display-3 fw-bold mb-3" style="letter-spacing: -1px; color: var(--text-primary);">Sylvester Ng Jun Hong</h1>
+                    <h2 class="h3 text-secondary-custom fw-light mb-4">Software Engineer / Student at APU</h2>
+                    <p class="lead text-secondary-custom mb-5" style="max-width: 650px; font-size:1.1rem; line-height:1.7;">
+                        I am a passionate Software Engineer with a solid foundation in Python, Java, and full-stack web development. 
+                        I have hands-on experience through academic projects in building web applications, databases, and structural application layouts with dynamic, intuitive user interfaces.
+                    </p>
+                    <div class="d-flex gap-3 align-items-center">
+                        <a href="#education" class="btn btn-info rounded-pill px-4 py-2 fw-medium text-dark" style="background-color: var(--accent-color); border:none; color: #fff !important;">
+                            Explore Portfolio <i class="bi bi-arrow-down ms-2"></i>
+                        </a>
+                        <a href="https://github.com" target="_blank" class="text-secondary-custom fs-4 px-2">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" class="text-secondary-custom fs-4 px-2">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: EDUCATION -->
+        <section id="education" class="reveal-element">
+            <div class="w-100">
+                <div class="row mb-5">
+                    <div class="col-md-8">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Academic Journey</span>
+                        <h2 class="display-5 fw-bold mt-1">Education</h2>
+                        <hr class="mt-3 opacity-10" style="border-color: var(--text-secondary);">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="timeline-container">
+                            <div class="timeline-item">
+                                <span class="text-accent small fw-bold">2023 - Present</span>
+                                <h3 class="h4 mt-1 mb-0">Diploma in ICT (Software Engineering)</h3>
+                                <p class="text-secondary-custom mb-2">Asia Pacific University (APU)</p>
+                                <div class="portfolio-badge mt-1">
+                                    <i class="bi bi-award me-1 text-accent"></i> CGPA: 3.86 / 4.0
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="text-secondary-custom small fw-bold">2018 - 2023</span>
+                                <h3 class="h4 mt-1 mb-0">Secondary School Education</h3>
+                                <p class="text-secondary-custom mb-2">SMK Tshung Tsin Sabah</p>
+                                <div class="portfolio-badge mt-1">
+                                    SPM Result: 8A 2B
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: EXPERIENCE -->
+        <section id="experience" class="reveal-element">
+            <div class="w-100">
+                <div class="row mb-5">
+                    <div class="col-md-8">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Professional Foundations</span>
+                        <h2 class="display-5 fw-bold mt-1">Experience</h2>
+                        <hr class="mt-3 opacity-10" style="border-color: var(--text-secondary);">
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="custom-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h3 class="h4 mb-0">Asia Pacific University</h3>
+                                    <p class="text-accent small mb-0">Student Practitioner</p>
+                                </div>
+                                <span class="text-secondary-custom small">2023 - Present</span>
+                            </div>
+                            <p class="text-secondary-custom small mb-3">Sustained curriculum domain focuses including core architectural implementation patterns and cross-platform framework testing:</p>
+                            <ul class="text-secondary-custom small ps-3" style="line-height:1.7;">
+                                <li>Foundation structures coding using Python and Java Object Oriented Programming.</li>
+                                <li>Web design stacks involving HTML, CSS, native JavaScript, PHP, and structural phpMyAdmin database interactions.</li>
+                                <li>Comprehensive studies across fundamental Operating Systems rules and Artificial Intelligence mechanics.</li>
+                                <li>Structural data-persistence frameworks utilizing Database Management principles.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="custom-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h3 class="h4 mb-0">Antah Juta Sdn. Bhd.</h3>
+                                    <p class="text-accent small mb-0">Accounting Clerk</p>
+                                </div>
+                                <span class="text-secondary-custom small">2023</span>
+                            </div>
+                            <p class="text-secondary-custom small mb-3">Handled financial logging workflows, administrative documentation safety audits, and public relationship infrastructure operations:</p>
+                            <ul class="text-secondary-custom small ps-3" style="line-height:1.7;">
+                                <li>Executed clean data entries into unified financial transactional processing systems.</li>
+                                <li>Audited and cross-checked credit and debit transaction accounts.</li>
+                                <li>Computed and generated programmatic commission payout metrics across logistics truck drivers.</li>
+                                <li>Assisted in on-site event operational logistics planning for the MATTA Fair Sabah 2023.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PROJECTS -->
+        <section id="projects" class="reveal-element">
+            <div class="w-100">
+                <div class="row mb-5">
+                    <div class="col-md-8">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Practical Adaptations</span>
+                        <h2 class="display-5 fw-bold mt-1">Past Projects</h2>
+                        <hr class="mt-3 opacity-10" style="border-color: var(--text-secondary);">
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-6 col-xl-3">
+                        <div class="custom-card d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="text-accent mb-2 fs-4"><i class="bi bi-robot"></i></div>
+                                <h3 class="h5 mb-2">AI Rental Chatbot</h3>
+                                <p class="text-secondary-custom small mb-3">Engineered an interactive conversational model trained to query property attributes and return matching recommendations effortlessly.</p>
+                            </div>
+                            <div class="portfolio-badge align-self-start mt-2">Artificial Intelligence</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <div class="custom-card d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="text-accent mb-2 fs-4"><i class="bi bi-window-sidebar"></i></div>
+                                <h3 class="h5 mb-2">Hostel Management GUI</h3>
+                                <p class="text-secondary-custom small mb-3">Constructed a robust Java GUI Swing application configured with strict Object-Oriented parameters to track occupancies.</p>
+                            </div>
+                            <div class="portfolio-badge align-self-start mt-2">Java / OOP</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <div class="custom-card d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="text-accent mb-2 fs-4"><i class="bi bi-calculator"></i></div>
+                                <h3 class="h5 mb-2">Responsive Maths Quiz</h3>
+                                <p class="text-secondary-custom small mb-3">Programmed an interactive quiz platform featuring state storage and server queries managed using PHP and phpMyAdmin structures.</p>
+                            </div>
+                            <div class="portfolio-badge align-self-start mt-2">Full-Stack Web</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xl-3">
+                        <div class="custom-card d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="text-accent mb-2 fs-4"><i class="bi bi-terminal"></i></div>
+                                <h3 class="h5 mb-2">Inventory System</h3>
+                                <p class="text-secondary-custom small mb-3">Developed a line-based administrative environment built within terminal environments handling customer, user, and stock allocations.</p>
+                            </div>
+                            <div class="portfolio-badge align-self-start mt-2">Python Core</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: SKILLS & LANGUAGES -->
+        <section id="skills" class="reveal-element">
+            <div class="w-100">
+                <div class="row mb-5">
+                    <div class="col-md-8">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Capabilities Matrices</span>
+                        <h2 class="display-5 fw-bold mt-1">Skills & Languages</h2>
+                        <hr class="mt-3 opacity-10" style="border-color: var(--text-secondary);">
+                    </div>
+                </div>
+
+                <div class="row g-5">
+                    <div class="col-md-7">
+                        <h3 class="h4 mb-4">Core Competencies</h3>
+                        <div class="d-flex flex-wrap">
+                            <span class="skill-badge">Web Development (HTML/CSS/JS/PHP)</span>
+                            <span class="skill-badge">Object Oriented Programming</span>
+                            <span class="skill-badge">Database Management (phpMyAdmin)</span>
+                            <span class="skill-badge">UI/UX Design</span>
+                            <span class="skill-badge">Wireframing</span>
+                            <span class="skill-badge">Process Flow Optimization</span>
+                            <span class="skill-badge">Digital Thinking</span>
+                            <span class="skill-badge">Structured Problem Solving</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5">
+                        <h3 class="h4 mb-4">Languages Spoken</h3>
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="lang-card">
+                                    <div class="fw-bold">Chinese</div>
+                                    <div class="small text-accent">Native Fluency</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="lang-card">
+                                    <div class="fw-bold">Cantonese</div>
+                                    <div class="small text-accent">Native Fluency</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="lang-card">
+                                    <div class="fw-bold">English</div>
+                                    <div class="small text-accent">Fluent Speaker</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="lang-card">
+                                    <div class="fw-bold">Malay</div>
+                                    <div class="small text-accent">Proficient</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER STATEMENT -->
+    <footer class="py-4 text-center border-top border-secondary-subtle mt-5" style="background: var(--surface-color); font-size:0.85rem; color: var(--text-secondary);">
+        <p class="mb-0">&copy; 2026 Sylvester Ng Jun Hong. Built with Bootstrap and GitHub Pages.</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- UI Core Automation Scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const topNav = document.getElementById("topNav");
+            const sidebarNav = document.getElementById("sidebarNav");
+            const revealElements = document.querySelectorAll(".reveal-element");
+            const navLinks = document.querySelectorAll(".sidebar-nav .nav-link");
+            const sections = document.querySelectorAll("main section");
+            
+            // Theme Toggle Selectors
+            const themeToggleBtn = document.getElementById("themeToggle");
+            const themeIcon = document.getElementById("themeIcon");
+            const htmlElement = document.documentElement;
+
+            // 1. Theme Configuration Logic
+            const savedTheme = localStorage.getItem("portfolio-theme") || "dark";
+            setTheme(savedTheme);
+
+            themeToggleBtn.addEventListener("click", () => {
+                const currentTheme = htmlElement.getAttribute("data-theme");
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                setTheme(newTheme);
+            });
+
+            function setTheme(theme) {
+                htmlElement.setAttribute("data-theme", theme);
+                localStorage.setItem("portfolio-theme", theme);
+                
+                if (theme === "light") {
+                    themeIcon.classList.replace("bi-moon-stars-fill", "bi-sun-fill");
+                } else {
+                    themeIcon.classList.replace("bi-sun-fill", "bi-moon-stars-fill");
+                }
+            }
+
+            // 2. Navigation Transition System 
+            window.addEventListener("scroll", () => {
+                let scrollPosition = window.scrollY;
+                
+                if (scrollPosition > 150) {
+                    topNav.classList.add("hidden");
+                    sidebarNav.classList.add("visible");
+                } else {
+                    topNav.classList.remove("hidden");
+                    sidebarNav.classList.remove("visible");
+                }
+
+                let currentActiveSection = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollPosition >= (sectionTop - sectionHeight / 3)) {
+                        currentActiveSection = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href").includes(currentActiveSection)) {
+                        link.classList.add("active");
+                    }
+                });
+            });
+
+            // 3. Fluid Intersection Observer Logic
+            const visualObserverOptions = {
+                root: null, 
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const elementRevealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                    } else {
+                        entry.target.classList.remove("active");
+                    }
+                });
+            }, visualObserverOptions);
+
+            revealElements.forEach(element => {
+                elementRevealObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
