@@ -12,8 +12,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Marked.js Markdown Parser CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <style>
         :root {
@@ -30,6 +28,7 @@
             --badge-bg: rgba(255, 255, 255, 0.03);
             --badge-border: rgba(255, 255, 255, 0.08);
             --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --accent-success: #10b981;
         }
 
         [data-theme="light"] {
@@ -70,6 +69,87 @@
         }
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-color);
+        }
+
+        /* Gradient Name Heading */
+        .name-gradient {
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        /* Seeking Internship Green Badge */
+        .seeking-badge {
+            background-color: rgba(16, 185, 129, 0.12);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.5px;
+        }
+        .seeking-badge .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        /* Profile Photo Container */
+        .profile-photo-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+        .profile-photo-frame {
+            aspect-ratio: 1 / 1;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(249, 115, 22, 0.2));
+            padding: 4px;
+            border: 1px solid var(--badge-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        /* Quick Info Highlights Card */
+        .hero-summary-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-top: 1rem;
         }
 
         /* --- NAVIGATION LAYOUTS --- */
@@ -154,9 +234,6 @@
         }
         .text-secondary-custom {
             color: var(--text-secondary);
-        }
-        .text-secondary-custom {
-            color: var(--text-secondary);
             transition: var(--transition-smooth); 
         }
         .text-secondary-custom:hover {
@@ -229,12 +306,162 @@
             color: var(--accent-color);
         }
 
-        /* Lang Card Blocks */
+        /* Education Card Styles */
+        .edu-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            border-radius: 14px;
+            padding: 1.5rem;
+            transition: var(--transition-smooth);
+        }
+        .edu-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .edu-tag {
+            background: var(--surface-accent);
+            color: var(--text-primary);
+            border: 1px solid var(--badge-border);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Experience Card Styles */
+        .exp-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+        }
+        .exp-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+        }
+        .exp-tag {
+            background: var(--surface-accent);
+            color: var(--text-primary);
+            border: 1px solid var(--badge-border);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Project Card Styling */
+        .proj-card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition-smooth);
+        }
+        .proj-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+        }
+        .proj-tag {
+            background: var(--surface-accent);
+            color: var(--text-primary);
+            border: 1px solid var(--badge-border);
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Lang Card */
         .lang-card {
             padding: 1rem;
             border-radius: 8px;
             background: var(--surface-color);
             border: 1px solid var(--badge-border);
+        }
+
+        /* Get In Touch Section */
+        .contact-info-card {
+            background: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            border-radius: 16px;
+            padding: 2rem;
+            height: 100%;
+            transition: var(--transition-smooth);
+        }
+
+        .contact-detail-box {
+            background: var(--surface-accent);
+            border: 1px solid var(--badge-border);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            transition: var(--transition-smooth);
+        }
+        .contact-detail-box:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .contact-form-card {
+            background: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            border-radius: 16px;
+            padding: 2rem;
+            height: 100%;
+            transition: var(--transition-smooth);
+        }
+
+        .form-control-custom {
+            background: var(--surface-accent) !important;
+            border: 1px solid var(--badge-border) !important;
+            color: var(--text-primary) !important;
+            border-radius: 10px !important;
+            padding: 0.75rem 1rem !important;
+            font-size: 0.9rem !important;
+            transition: var(--transition-smooth);
+        }
+        .form-control-custom:focus {
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15) !important;
+            outline: none;
+        }
+        .form-control-custom::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        #form-status p {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 500;
         }
 
         /* Theme Toggle Control Button Styling */
@@ -257,6 +484,43 @@
             background: rgba(56, 189, 248, 0.05);
         }
 
+        /* Back to Top Floating Action Button */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background-color: var(--surface-color);
+            border: 1px solid var(--badge-border);
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            z-index: 1060;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        .back-to-top-btn.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top-btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(56, 189, 248, 0.3);
+        }
+
         /* Responsive Optimization Controls */
         @media (max-width: 991.98px) {
             .sidebar-nav {
@@ -272,9 +536,15 @@
                 min-height: auto;
                 padding: 45px 0;
             }
+            .back-to-top-btn {
+                bottom: 1.25rem;
+                right: 1.25rem;
+                width: 42px;
+                height: 42px;
+                font-size: 1rem;
+            }
         }
 
-        /* Core Fix: Prevents mobile layout overlapping beneath floating top nav */
         @media (max-width: 1199.98px) {
             #hero {
                 padding-top: 130px !important;
@@ -297,15 +567,16 @@
         <div class="container d-flex justify-content-between align-items-center">
             <span class="fw-bold tracking-widest text-uppercase text-accent" style="font-size: 1.1rem;">SN.</span>
             <div class="d-none d-lg-flex gap-4">
-                <a href="#education" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Education</a>
-                <a href="#experience" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Experience</a>
-                <a href="#projects" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Projects</a>
-                <a href="#skills" class="text-decoration-none text-secondary-custom hover:text-accent nav-link-top">Skills</a>
+                <a href="#hero" class="text-decoration-none text-secondary-custom nav-link-top">About</a>
+                <a href="#education" class="text-decoration-none text-secondary-custom nav-link-top">Education</a>
+                <a href="#experience" class="text-decoration-none text-secondary-custom nav-link-top">Experience</a>
+                <a href="#projects" class="text-decoration-none text-secondary-custom nav-link-top">Projects</a>
+                <a href="#skills" class="text-decoration-none text-secondary-custom nav-link-top">Skills</a>
+                <a href="#contact" class="text-decoration-none text-secondary-custom nav-link-top">Contact</a>
             </div>
             
             <div class="d-flex align-items-center gap-3">
-                <!-- Theme Toggle Button Layout -->
-                <button class="theme-btn" id="themeToggle" aria-label="Toggle structural light and dark themes">
+                <button class="theme-btn" id="themeToggle" aria-label="Toggle light and dark themes">
                     <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
                 </button>
                 
@@ -324,30 +595,90 @@
             <a class="nav-link" href="#experience"><i class="bi bi-briefcase"></i> <span>Experience</span></a>
             <a class="nav-link" href="#projects"><i class="bi bi-code-slash"></i> <span>Projects</span></a>
             <a class="nav-link" href="#skills"><i class="bi bi-gear"></i> <span>Skills</span></a>
+            <a class="nav-link" href="#contact"><i class="bi bi-envelope"></i> <span>Contact</span></a>
         </div>
     </nav>
+
+    <!-- PERMANENT SCROLL TO TOP BUTTON (BOTTOM RIGHT) -->
+    <button class="back-to-top-btn" id="backToTopBtn" aria-label="Scroll back to top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
 
     <!-- MAIN WRAPPER -->
     <main class="container px-4 px-md-5">
 
-        <!-- SECTION 1: MINIMALIST INTRO (HERO) -->
-        <section id="hero">
-            <div class="row w-100 align-items-center">
-                <div class="col-lg-8 reveal-element active">
-                    <p class="text-accent tracking-widest text-uppercase fw-semibold mb-2" style="font-size:0.9rem;">Available For Internship</p>
-                    <h1 class="display-3 fw-bold mb-3" style="letter-spacing: -1px; color: var(--text-primary);">Sylvester Ng Jun Hong</h1>
-                    <h2 class="h3 text-secondary-custom fw-light mb-4">Software Engineer / Student at APU</h2>
-                    <p class="lead text-secondary mb-4" id="md-hero-bio">Loading...</p>
-                    <div class="d-flex gap-3 align-items-center">
-                        <a href="#education" class="btn btn-info rounded-pill px-4 py-2 fw-medium text-dark" style="background-color: var(--accent-color); border:none; color: #fff !important;">
-                            Explore Portfolio <i class="bi bi-arrow-down ms-2"></i>
+        <!-- SECTION 1: HERO / ABOUT ME -->
+        <section id="hero" class="pb-0">
+            <div class="row w-100 align-items-center g-5">
+                <!-- Intro Left Column -->
+                <div class="col-lg-7 reveal-element active">
+                    <div class="mb-3">
+                        <span class="seeking-badge fw-semibold text-uppercase">
+                            <span class="pulse-dot"></span> Actively Seeking for Internship
+                        </span>
+                    </div>
+
+                    <h1 class="display-4 fw-bold mb-2" style="letter-spacing: -1px;">
+                        <span class="name-gradient">Sylvester Ng Jun Hong</span>
+                    </h1>
+                    
+                    <h2 class="h4 text-secondary-custom fw-normal mb-3">Software Engineer / Student at APU</h2>
+                    
+                    <p class="lead text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.7;">
+                        I am a passionate Software Engineer with a solid foundation in Python, Java, and full-stack web development. I have hands-on experience through academic and industry projects in building web applications, databases, and structural application layouts with dynamic, intuitive user interfaces.
+                    </p>
+
+                    <!-- Call To Action & Socials -->
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <a href="#contact" class="btn btn-info rounded-pill px-4 py-2 fw-medium text-dark" style="background-color: var(--accent-color); border:none; color: #fff !important;">
+                            <i class="bi bi-envelope-fill me-2"></i>Get in Touch
                         </a>
-                        <a href="https://github.com" target="_blank" class="text-secondary-custom fs-4 px-2">
-                            <i class="bi bi-github"></i>
+                        <a href="resume.pdf" target="_blank" class="btn btn-outline-secondary rounded-pill px-4 py-2 fw-medium" style="border-color: var(--badge-border); color: var(--text-primary);">
+                            <i class="bi bi-file-earmark-person me-2"></i>View Resume
                         </a>
-                        <a href="https://linkedin.com" target="_blank" class="text-secondary-custom fs-4 px-2">
-                            <i class="bi bi-linkedin"></i>
-                        </a>
+                        <div class="d-flex align-items-center ms-lg-2 gap-2">
+                            <a href="https://github.com/Sylvesterng" target="_blank" class="text-secondary-custom fs-4 px-2" aria-label="GitHub Profile">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/sylvester-ng-jun-hong/" target="_blank" class="text-secondary-custom fs-4 px-2" aria-label="LinkedIn Profile">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Photo & Summary Right Column -->
+                <div class="col-lg-5 reveal-element active">
+                    <div class="profile-photo-wrapper">
+                        <!-- Profile Photo Frame -->
+                        <div class="profile-photo-frame">
+                            <img src="CV Pic.jpeg" alt="Sylvester Ng Jun Hong">
+                        </div>
+
+                        <!-- Quick Summary Card -->
+                        <div class="hero-summary-card">
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <i class="bi bi-mortarboard-fill text-accent fs-5"></i>
+                                <div>
+                                    <div class="text-secondary-custom small" style="font-size:0.75rem;">PURSUING DEGREE</div>
+                                    <div class="fw-semibold small">BSc (Hons) Computer Science @ APU</div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <i class="bi bi-geo-alt-fill text-accent fs-5"></i>
+                                <div>
+                                    <div class="text-secondary-custom small" style="font-size:0.75rem;">SEEKING ROLES IN</div>
+                                    <div class="fw-semibold small">Software Engineering / Full-Stack (Kuala Lumpur & Remote)</div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <i class="bi bi-trophy-fill text-accent fs-5"></i>
+                                <div>
+                                    <div class="text-secondary-custom small" style="font-size:0.75rem;">DIPLOMA CGPA</div>
+                                    <div class="fw-semibold small text-success">3.86 / 4.00</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -356,37 +687,776 @@
         <!-- SECTION 2: EDUCATION -->
         <section id="education" class="reveal-element">
             <div class="w-100">
-                <div class="row mb-4"><div class="col-12"><span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Academic Journey</span><h2 class="h1 fw-bold text-white mt-1">Education</h2><hr class="mt-2 opacity-10"></div></div>
-                <div class="row"><div class="col-xl-10"><div class="timeline-container" id="md-education-target"></div></div></div>
+                <!-- Section Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Academic Journey</span>
+                        <h2 class="h1 fw-bold mt-1" style="color: var(--text-primary);">Education</h2>
+                        <hr class="mt-2 opacity-10">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-11 col-xxl-10">
+                        <div class="timeline-container">
+
+                            <!-- Degree -->
+                            <div class="timeline-item">
+                                <div class="edu-card">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                                        <div>
+                                            <h3 class="h4 fw-bold mb-1" style="color: var(--text-primary);">BSc (Hons) in Computer Science</h3>
+                                            <h4 class="h6 text-accent mb-0 fw-semibold">Asia Pacific University of Technology & Innovation (APU)</h4>
+                                        </div>
+                                        <span class="portfolio-badge"><i class="bi bi-clock-history me-1 text-accent"></i> Current CGPA 4.00 </span>
+                                    </div>
+
+                                    <!-- Meta details (Location, Dates) -->
+                                    <div class="d-flex flex-wrap gap-3 my-2 pb-2 border-bottom border-secondary-subtle">
+                                        <span class="meta-item"><i class="bi bi-calendar3 text-accent"></i> 2026 - Present</span>
+                                        <span class="meta-item"><i class="bi bi-geo-alt-fill text-accent"></i> Kuala Lumpur, Malaysia</span>
+                                        <span class="meta-item"><i class="bi bi-mortarboard-fill text-accent"></i> Undergraduate Degree</span>
+                                    </div>
+
+                                    <!-- Highlights / Key Learning -->
+                                    <div class="mt-3">
+                                        <p class="small fw-semibold text-secondary-custom mb-2">Key Areas of Focus & Study:</p>
+                                        <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.7;">
+                                            <li>Advanced algorithmic problem solving, software design patterns, and concurrent computing architecture.</li>
+                                            <li>Enterprise system design, distributed data systems, and end-to-end full-stack scalability.</li>
+                                            <li>Exploration of machine learning integration, intelligent system design, and security engineering.</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Skills Badges -->
+                                    <div class="d-flex flex-wrap gap-2 pt-1">
+                                        <span class="edu-tag">Algorithms & Data Structures</span>
+                                        <span class="edu-tag">Software Architecture</span>
+                                        <span class="edu-tag">Distributed Systems</span>
+                                        <span class="edu-tag">AI/ML Integration</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Diploma -->
+                            <div class="timeline-item">
+                                <div class="edu-card">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                                        <div>
+                                            <h3 class="h4 fw-bold mb-1" style="color: var(--text-primary);">Diploma in ICT (Specialism in Software Engineering)</h3>
+                                            <h4 class="h6 text-accent mb-0 fw-semibold">Asia Pacific University of Technology & Innovation (APU)</h4>
+                                        </div>
+                                        <span class="portfolio-badge text-success border-success-subtle bg-success-subtle fw-bold">
+                                            <i class="bi bi-award-fill me-1"></i> CGPA: 3.86 / 4.00
+                                        </span>
+                                    </div>
+
+                                    <!-- Meta details (Location, Dates) -->
+                                    <div class="d-flex flex-wrap gap-3 my-2 pb-2 border-bottom border-secondary-subtle">
+                                        <span class="meta-item"><i class="bi bi-calendar3 text-accent"></i> 2023 - 2025</span>
+                                        <span class="meta-item"><i class="bi bi-geo-alt-fill text-accent"></i> Kuala Lumpur, Malaysia</span>
+                                        <span class="meta-item"><i class="bi bi-patch-check-fill text-accent"></i> Graduated with High Distinction</span>
+                                    </div>
+
+                                    <!-- Highlights / Key Learning -->
+                                    <div class="mt-3">
+                                        <p class="small fw-semibold text-secondary-custom mb-2">Core Practical Competencies Acquired:</p>
+                                        <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.7;">
+                                            <li>Built robust desktop GUI applications adhering strictly to Java Object-Oriented Programming (OOP) paradigms.</li>
+                                            <li>Designed normalized relational database systems and integrated persistent data workflows via SQL & phpMyAdmin.</li>
+                                            <li>Engineered dynamic client-server web apps utilizing full-stack stacks (PHP, JavaScript, HTML5/CSS3).</li>
+                                            <li>Mastered foundational Operating Systems concepts, software development lifecycles (SDLC), and agile delivery.</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Skills Badges -->
+                                    <div class="d-flex flex-wrap gap-2 pt-1">
+                                        <span class="edu-tag">Java OOP</span>
+                                        <span class="edu-tag">SQL / Relational DBs</span>
+                                        <span class="edu-tag">Full-Stack Web (PHP & JS)</span>
+                                        <span class="edu-tag">SDLC & Agile</span>
+                                        <span class="edu-tag">Operating Systems</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Secondary School -->
+                            <div class="timeline-item">
+                                <div class="edu-card">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                                        <div>
+                                            <h3 class="h4 fw-bold mb-1" style="color: var(--text-primary);">Secondary School Education (SPM)</h3>
+                                            <h4 class="h6 text-accent mb-0 fw-semibold">SMK Tshung Tsin Sabah</h4>
+                                        </div>
+                                        <span class="portfolio-badge">
+                                            <i class="bi bi-star-fill text-warning me-1"></i> SPM: 8A 2B
+                                        </span>
+                                    </div>
+
+                                    <!-- Meta details (Location, Dates) -->
+                                    <div class="d-flex flex-wrap gap-3 my-2 pb-2 border-bottom border-secondary-subtle">
+                                        <span class="meta-item"><i class="bi bi-calendar3 text-accent"></i> 2018 - 2023</span>
+                                        <span class="meta-item"><i class="bi bi-geo-alt-fill text-accent"></i> Kota Kinabalu, Sabah, Malaysia</span>
+                                        <span class="meta-item"><i class="bi bi-award text-accent"></i> High School Certificate</span>
+                                    </div>
+
+                                    <!-- Highlights / Key Learning -->
+                                    <div class="mt-3">
+                                        <p class="small fw-semibold text-secondary-custom mb-2">Academic & Extracurricular Foundations:</p>
+                                        <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.7;">
+                                            <li>Developed strong analytical, mathematical, and logical reasoning problem-solving foundations.</li>
+                                            <li>Built trilingual communication proficiency in English, Mandarin Chinese, and Bahasa Melayu.</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Skills Badges -->
+                                    <div class="d-flex flex-wrap gap-2 pt-1">
+                                        <span class="edu-tag">Mathematics & Logic</span>
+                                        <span class="edu-tag">Multilingual Communication</span>
+                                        <span class="edu-tag">Analytical Reasoning</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- SECTION 3: EXPERIENCE -->
         <section id="experience" class="reveal-element">
             <div class="w-100">
-                <div class="row mb-4"><div class="col-12"><span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Professional Foundations</span><h2 class="h1 fw-bold text-white mt-1">Experience</h2><hr class="mt-2 opacity-10"></div></div>
-                <div class="row g-4" id="md-experience-target"></div>
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Professional Foundations</span>
+                        <h2 class="h1 fw-bold mt-1" style="color: var(--text-primary);">Experience</h2>
+                        <hr class="mt-2 opacity-10">
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-12">
+                        <div class="exp-card">
+                            <div>
+                                <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                                    <div>
+                                        <h3 class="h4 fw-bold mb-1" style="color: var(--text-primary);">Full Stack Web Developer Intern</h3>
+                                        <h4 class="h6 text-accent mb-0 fw-semibold">Softwell Sdn. Bhd.</h4>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-briefcase me-1 text-accent"></i> Internship</span>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 my-2 pb-2 border-bottom border-secondary-subtle">
+                                    <span class="meta-item"><i class="bi bi-calendar3 text-accent"></i> 2025</span>
+                                    <span class="meta-item"><i class="bi bi-geo-alt-fill text-accent"></i> Malaysia</span>
+                                    <span class="meta-item"><i class="bi bi-laptop text-accent"></i> Full-Stack Engineering</span>
+                                </div>
+
+                                <div class="mt-3">
+                                    <p class="small fw-semibold text-secondary-custom mb-2">Key Responsibilities & Learned Competencies:</p>
+                                    <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.7;">
+                                        <li>Maintained and optimized the enterprise-level <strong>AceLiving</strong> hospitality management system, implementing dynamic occupancy tracking logic.</li>
+                                        <li>Engineered core features for a multi-tier real estate system, bridging custom operational workflows between property developers, sales agents (unit locks), and legal auditors (loan signings).</li>
+                                        <li>Integrated IoT smart utility hardware, executing automated smart meter synchronization and remote smart lock accessibility.</li>
+                                        <li>Architected backend performance enhancements, including application-wide multi-language localization engines and secure transactional receipt workflows.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="exp-tag">Laravel (PHP)</span>
+                                <span class="exp-tag">MySQL</span>
+                                <span class="exp-tag">IoT Hardware Integration</span>
+                                <span class="exp-tag">RESTful Architecture</span>
+                                <span class="exp-tag">System Localization</span>
+                                <span class="exp-tag">Full-Stack Development</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="exp-card">
+                            <div>
+                                <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                                    <div>
+                                        <h3 class="h5 fw-bold mb-1" style="color: var(--text-primary);">Student Practitioner</h3>
+                                        <h4 class="h6 text-accent mb-0 fw-semibold">Asia Pacific University (APU)</h4>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-code-square me-1 text-accent"></i> Academic Lab</span>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 my-2 pb-2 border-bottom border-secondary-subtle">
+                                    <span class="meta-item"><i class="bi bi-calendar3 text-accent"></i> 2023 - Present</span>
+                                    <span class="meta-item"><i class="bi bi-geo-alt-fill text-accent"></i> Kuala Lumpur, Malaysia</span>
+                                </div>
+
+                                <div class="mt-3">
+                                    <p class="small fw-semibold text-secondary-custom mb-2">Key Areas of Practice & Development:</p>
+                                    <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.7;">
+                                        <li>Designed software modules utilizing Python and strict Java Object-Oriented Design patterns.</li>
+                                        <li>Developed dynamic web modules integrated with relational phpMyAdmin database management systems.</li>
+                                        <li>Conducted experiments on OS scheduling principles, memory management, and baseline AI algorithms.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="exp-tag">Java OOP</span>
+                                <span class="exp-tag">Python</span>
+                                <span class="exp-tag">phpMyAdmin</span>
+                                <span class="exp-tag">Web Technologies</span>
+                                <span class="exp-tag">Algorithms</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="exp-card">
+                            <div>
+                                <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+                                    <div>
+                                        <h3 class="h5 fw-bold mb-1" style="color: var(--text-primary);">Accounting Clerk</h3>
+                                        <h4 class="h6 text-accent mb-0 fw-semibold">Antah Juta Sdn. Bhd.</h4>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-file-earmark-spreadsheet me-1 text-accent"></i> Operations</span>
+                                </div>
+
+                                <div class="d-flex flex-wrap gap-3 my-2 pb-2 border-bottom border-secondary-subtle">
+                                    <span class="meta-item"><i class="bi bi-calendar3 text-accent"></i> 2023</span>
+                                    <span class="meta-item"><i class="bi bi-geo-alt-fill text-accent"></i> Sabah, Malaysia</span>
+                                </div>
+
+                                <div class="mt-3">
+                                    <p class="small fw-semibold text-secondary-custom mb-2">Key Responsibilities & Administrative Output:</p>
+                                    <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.7;">
+                                        <li>Executed financial ledger data entries and performed verification cross-checks across credit/debit transaction logs.</li>
+                                        <li>Calculated and audited metric-based payout formulas for logistics operations.</li>
+                                        <li>Assisted in on-site event logistics management and vendor coordination during MATTA Fair Sabah 2023.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="exp-tag">Financial Data Entry</span>
+                                <span class="exp-tag">Spreadsheet Auditing</span>
+                                <span class="exp-tag">Logistics Planning</span>
+                                <span class="exp-tag">Cross-functional Collaboration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 
         <!-- SECTION 4: PROJECTS -->
-        <section id="projects" class="reveal-element">
+        <section id="projects" class="pb-0 reveal-element">
             <div class="w-100">
-                <div class="row mb-4"><div class="col-12"><span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Practical Adaptations</span><h2 class="h1 fw-bold text-white mt-1">Past Projects</h2><hr class="mt-2 opacity-10"></div></div>
-                <div class="row g-4" id="md-projects-target"></div>
+                <!-- Section Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Practical Adaptations</span>
+                        <h2 class="h1 fw-bold mt-1" style="color: var(--text-primary);">Past Projects</h2>
+                        <hr class="mt-2 opacity-10">
+                    </div>
+                </div>
+
+                <div class="row g-4">
+
+                    <!-- 1. APU - ASC -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-car-front-fill"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">APU – ASC (Automotive Service Center)</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-window-stack me-1 text-accent"></i> Desktop App</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    A desktop management system designed for an automotive service center to streamline service appointments, vehicle maintenance logs, and job order tracking.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Automated end-to-end service bookings and technician job task tracking.</li>
+                                    <li>Engineered user role separation for service advisors, mechanics, and managers.</li>
+                                    <li>Implemented structured OOP patterns with local data persistence.</li>
+                                </ul>
+
+                                <!-- Video Toggle Button -->
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-info btn-sm rounded-pill px-3" type="button" data-bs-toggle="collapse" data-bs-target="#video-asc" aria-expanded="false" aria-controls="video-asc">
+                                        <i class="bi bi-play-circle me-1"></i> Watch Demo / Video
+                                    </button>
+                                    <div class="collapse mt-3" id="video-asc">
+                                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden border border-secondary-subtle">
+                                            <iframe src="https://www.youtube.com/embed/Mia7ZNSPzpY" title="Automobile Service Center Management System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">Java</span>
+                                <span class="proj-tag">Java Swing & AWT</span>
+                                <span class="proj-tag">OOP Architecture</span>
+                                <span class="proj-tag">Desktop UI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Propbot -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-robot"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">Propbot – AI Property Rental Chatbot</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-chat-dots me-1 text-accent"></i> Conversational AI</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    An intelligent conversational chatbot built to automate property rental consultations and recommend units based on tenant preferences.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Trained conversation flows to parse budget, location, and property type inquiries.</li>
+                                    <li>Automated FAQ resolution and tenant lead capture workflows.</li>
+                                    <li>Integrated responsive conversational fallback logic for edge queries.</li>
+                                </ul>
+
+                                <!-- Video Toggle Button -->
+                                <div class="mb-3">
+                                    <a href="https://cdn.botpress.cloud/webchat/v2/shareable.html?botId=e2d91cd5-ac7e-4927-9499-336a4e21f19d" 
+                                    target="_blank" rel="noopener noreferrer" class="btn btn-outline-info btn-sm rounded-pill px-3">
+                                        See Demo <i class="bi bi-box-arrow-up-right ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">Botpress</span>
+                                <span class="proj-tag">Conversational AI</span>
+                                <span class="proj-tag">NLP Logic</span>
+                                <span class="proj-tag">Workflow Automation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. UniSphere -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-buildings"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">UniSphere – Campus Management System</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-globe me-1 text-accent"></i> Web Platform</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    A centralized web-based platform integrating everyday academic administration, facility reservations, and multi-department communication.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Unified student registration, notices, and course resource portals.</li>
+                                    <li>Implemented relational MySQL schema design for seamless data normalization.</li>
+                                    <li>Built authenticated role-based dashboards for staff and students.</li>
+                                </ul>
+
+                                <!-- Video Toggle Button -->
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-info btn-sm rounded-pill px-3" type="button" data-bs-toggle="collapse" data-bs-target="#video-unisphere" aria-expanded="false" aria-controls="video-unisphere">
+                                        <i class="bi bi-play-circle me-1"></i> Watch Demo / Video
+                                    </button>
+                                    <div class="collapse mt-3" id="video-unisphere">
+                                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden border border-secondary-subtle">
+                                            <iframe src="https://youtu.be/domUbFc7RoU" title="UniSphere Demo" allowfullscreen></iframe>
+                                            <iframe src="https://www.youtube.com/embed/domUbFc7RoU" title="UniSphere (All-in-One University Facility Management System)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">PHP</span>
+                                <span class="proj-tag">MySQL</span>
+                                <span class="proj-tag">JavaScript</span>
+                                <span class="proj-tag">HTML5 / CSS3</span>
+                                <span class="proj-tag">Full-Stack</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. APU Hostel Management -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-receipt-cutoff"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">APU Hostel Management Fees Payment</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-cash-stack me-1 text-accent"></i> Desktop App</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    A standalone Java GUI system engineered to handle residential room allocations, billing generation, and student hostel fee transactions.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Tracked room occupancy status, monthly utility billing, and outstanding arrears.</li>
+                                    <li>Generated formatted electronic transaction receipts upon payment confirmation.</li>
+                                    <li>Maintained strict object validation and multi-file text persistence structures.</li>
+                                </ul>
+
+                                <!-- Video Toggle Button -->
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-info btn-sm rounded-pill px-3" type="button" data-bs-toggle="collapse" data-bs-target="#video-hostel" aria-expanded="false" aria-controls="video-hostel">
+                                        <i class="bi bi-play-circle me-1"></i> Watch Demo / Video
+                                    </button>
+                                    <div class="collapse mt-3" id="video-hostel">
+                                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden border border-secondary-subtle">
+                                            <iframe src="" title="Hostel Management Demo" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">Java</span>
+                                <span class="proj-tag">Java Swing & AWT</span>
+                                <span class="proj-tag">OOP</span>
+                                <span class="proj-tag">File I/O Persistence</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Employee Attrition Analysis -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-graph-up-arrow"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">Employee Attrition Analysis</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-pie-chart me-1 text-accent"></i> Data Analytics</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    An end-to-end data analytics study performing descriptive-to-prescriptive evaluation across 2,000 workforce records to uncover turnover drivers.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Conducted rigorous data cleaning, missing-value imputation, and statistical modeling in R.</li>
+                                    <li>Identified environment satisfaction and commute distance as primary drivers of employee churn.</li>
+                                    <li>Formulated data-driven retention strategies and prescriptive management recommendations.</li>
+                                </ul>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">R Programming</span>
+                                <span class="proj-tag">Statistical Computing</span>
+                                <span class="proj-tag">Data Visualization</span>
+                                <span class="proj-tag">Predictive Analytics</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. MathMind -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-calculator"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">MathMind – Web Math Learning Website</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-mortarboard me-1 text-accent"></i> EdTech</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    An interactive mathematics learning and quiz platform designed with real-time feedback and server-backed performance tracking.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Engineered timed quiz modules featuring dynamic formula evaluation.</li>
+                                    <li>Saved historical student performance and topic progression to a MySQL database.</li>
+                                    <li>Delivered fully responsive, client-side dynamic feedback using native JavaScript.</li>
+                                </ul>
+
+                                <!-- Video Toggle Button -->
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-info btn-sm rounded-pill px-3" type="button" data-bs-toggle="collapse" data-bs-target="#video-mathmind" aria-expanded="false" aria-controls="video-mathmind">
+                                        <i class="bi bi-play-circle me-1"></i> Watch Demo / Video
+                                    </button>
+                                    <div class="collapse mt-3" id="video-mathmind">
+                                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden border border-secondary-subtle">
+                                            <iframe src="" title="MathMind Demo" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">PHP</span>
+                                <span class="proj-tag">MySQL</span>
+                                <span class="proj-tag">JavaScript</span>
+                                <span class="proj-tag">HTML5 / CSS3</span>
+                                <span class="proj-tag">Full-Stack Web</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 7. ShopSupport -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-headset"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">ShopSupport – Ticketing Support System</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-sliders me-1 text-accent"></i> Low-Code Platform</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    A structured customer support and helpdesk management solution developed on Joget DX to automate multi-stage incident resolution.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Configured ticket lifecycles from intake to SLA escalation and resolution.</li>
+                                    <li>Designed automated status notifications and agent assignment workflows.</li>
+                                    <li>Built executive overview dashboards tracking mean resolution times.</li>
+                                </ul>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">Joget DX</span>
+                                <span class="proj-tag">Low-Code Development</span>
+                                <span class="proj-tag">BPMN Workflow</span>
+                                <span class="proj-tag">SLA Automation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 8. KLCCC Business Transaction System -->
+                    <div class="col-lg-6">
+                        <div class="proj-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="text-accent fs-4"><i class="bi bi-terminal-fill"></i></div>
+                                        <h3 class="h5 fw-bold mb-0" style="color: var(--text-primary);">KLCCC Business Transaction System</h3>
+                                    </div>
+                                    <span class="portfolio-badge"><i class="bi bi-code-slash me-1 text-accent"></i> Core CLI</span>
+                                </div>
+                                <p class="text-secondary-custom small mb-2">
+                                    A terminal-based commercial accounting and transactional record-keeping system developed for inventory and ledger auditing.
+                                </p>
+                                <ul class="text-secondary-custom small ps-3 mb-3" style="line-height: 1.6;">
+                                    <li>Engineered customer, supplier, and inventory allocation management algorithms.</li>
+                                    <li>Implemented transaction ledger balance computing with automated receipt export.</li>
+                                    <li>Applied modular programming principles with input sanitization and error-handling routines.</li>
+                                </ul>
+
+                                <!-- Video Toggle Button -->
+                                <div class="mb-3">
+                                    <button class="btn btn-outline-info btn-sm rounded-pill px-3" type="button" data-bs-toggle="collapse" data-bs-target="#video-klccc" aria-expanded="false" aria-controls="video-klccc">
+                                        <i class="bi bi-play-circle me-1"></i> Watch Demo / Video
+                                    </button>
+                                    <div class="collapse mt-3" id="video-klccc">
+                                        <div class="ratio ratio-16x9 rounded-3 overflow-hidden border border-secondary-subtle">
+                                            <iframe src="" title="KLCCC System Demo" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-2 pt-2 border-top border-secondary-subtle">
+                                <span class="proj-tag">Python Core</span>
+                                <span class="proj-tag">File Handling</span>
+                                <span class="proj-tag">CLI Development</span>
+                                <span class="proj-tag">Financial Logic</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
 
         <!-- SECTION 5: SKILLS & LANGUAGES -->
         <section id="skills" class="reveal-element">
-                <div class="w-100">
-                    <div class="row mb-4"><div class="col-12"><span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Capabilities Matrices</span><h2 class="h1 fw-bold text-white mt-1">Skills & Languages</h2><hr class="mt-2 opacity-10"></div></div>
-                    <div class="row g-4">
-                        <div class="col-xl-7"><h4 class="h5 text-white-50 mb-3">Core Competencies</h4><div class="d-flex flex-wrap" id="md-skills-target"></div></div>
-                        <div class="col-xl-5"><h4 class="h5 text-white-50 mb-3">Languages Spoken</h4><div class="row g-2" id="md-languages-target"></div></div>
+            <div class="w-100">
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Capabilities Matrices</span>
+                        <h2 class="h1 fw-bold mt-1" style="color: var(--text-primary);">Skills & Languages</h2>
+                        <hr class="mt-2 opacity-10">
                     </div>
                 </div>
-            </section>
+                <div class="row g-4">
+                    <!-- Skills -->
+                    <div class="col-xl-7">
+                        <h3 class="h5 text-secondary-custom mb-3">Core Competencies</h3>
+                        <div class="d-flex flex-wrap">
+                            <span class="skill-badge">Web Development (HTML/CSS/JS/PHP)</span>
+                            <span class="skill-badge">Laravel</span>
+                            <span class="skill-badge">Object Oriented Programming (Java)</span>
+                            <span class="skill-badge">Database Management (phpMyAdmin)</span>
+                            <span class="skill-badge">UI/UX Design</span>
+                            <span class="skill-badge">Wireframing</span>
+                            <span class="skill-badge">Process Flow Optimization</span>
+                            <span class="skill-badge">Digital Thinking</span>
+                            <span class="skill-badge">Structured Problem Solving</span>
+                            <span class="skill-badge">Linux</span>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="col-xl-5">
+                        <h3 class="h5 text-secondary-custom mb-3">Languages Spoken</h3>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="lang-card d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold small">Chinese</span>
+                                    <span class="badge bg-info text-dark font-monospace" style="font-size:0.65rem;">Native</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="lang-card d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold small">Cantonese</span>
+                                    <span class="badge bg-info text-dark font-monospace" style="font-size:0.65rem;">Native</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="lang-card d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold small">English</span>
+                                    <span class="badge bg-info text-dark font-monospace" style="font-size:0.65rem;">Fluent</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="lang-card d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold small">Malay</span>
+                                    <span class="badge bg-secondary font-monospace" style="font-size:0.65rem;">Proficient</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: GET IN TOUCH -->
+        <section id="contact" class="reveal-element py-5">
+            <div class="w-100">
+                <!-- Section Header -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <span class="text-accent text-uppercase fw-bold tracking-wider" style="font-size:0.85rem;">Let's Connect</span>
+                        <h2 class="h1 fw-bold mt-1" style="color: var(--text-primary);">Get in Touch</h2>
+                        <hr class="mt-2 opacity-10">
+                    </div>
+                </div>
+
+                <div class="row g-4 align-items-stretch">
+                    
+                    <!-- Left Column: Contact Information -->
+                    <div class="col-lg-5">
+                        <div class="contact-info-card d-flex flex-column justify-content-between">
+                            <div>
+                                <h3 class="h4 fw-bold mb-2" style="color: var(--text-primary);">Let's discuss new opportunities!</h3>
+                                <p class="text-secondary-custom small mb-4" style="line-height: 1.6;">
+                                    I am actively seeking internship opportunities and will reply to inquiries as soon as possible. Feel free to reach out via email, phone, or connect through my social links.
+                                </p>
+
+                                <!-- Contact Details List -->
+                                <div class="d-flex flex-column gap-3 mb-4">
+                                    
+                                    <!-- Email Item with Copy Button -->
+                                    <div class="contact-detail-box d-flex align-items-center justify-content-between">
+                                        <div class="d-flex align-items-center gap-3 overflow-hidden">
+                                            <div class="text-accent fs-5"><i class="bi bi-envelope-at-fill"></i></div>
+                                            <div class="text-truncate">
+                                                <div class="text-secondary-custom" style="font-size:0.75rem; letter-spacing: 0.5px;">EMAIL</div>
+                                                <span class="fw-semibold small text-truncate d-block" id="contactEmail" style="color: var(--text-primary);">sylvesterng9955@gmail.com</span>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline-info btn-sm rounded-pill px-2 py-1 ms-2" type="button" id="copyEmailBtn" title="Copy Email" style="font-size: 0.75rem; white-space: nowrap;">
+                                            <i class="bi bi-clipboard me-1" id="copyIcon"></i><span id="copyText">Copy</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- Phone Item -->
+                                    <div class="contact-detail-box d-flex align-items-center gap-3">
+                                        <div class="text-accent fs-5"><i class="bi bi-telephone-fill"></i></div>
+                                        <div>
+                                            <div class="text-secondary-custom" style="font-size:0.75rem; letter-spacing: 0.5px;">PHONE / WHATSAPP</div>
+                                            <a href="tel:+60123456789" class="fw-semibold small text-decoration-none text-accent">+60 10-943 7156</a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Base Location Item -->
+                                    <div class="contact-detail-box d-flex align-items-center gap-3">
+                                        <div class="text-accent fs-5"><i class="bi bi-geo-alt-fill"></i></div>
+                                        <div>
+                                            <div class="text-secondary-custom" style="font-size:0.75rem; letter-spacing: 0.5px;">BASE LOCATION</div>
+                                            <span class="fw-semibold small" style="color: var(--text-primary);">Kuala Lumpur, Malaysia (Open to Remote)</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Social Media Links -->
+                            <div class="pt-3 border-top border-secondary-subtle d-flex flex-wrap gap-2">
+                                <a href="https://github.com/Sylvesterng" target="_blank" class="btn btn-outline-secondary btn-sm rounded-pill px-3 flex-grow-1" style="border-color: var(--badge-border); color: var(--text-primary);">
+                                    <i class="bi bi-github me-1"></i> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/sylvester-ng-jun-hong/" target="_blank" class="btn btn-outline-info btn-sm rounded-pill px-3 flex-grow-1" style="border-color: var(--accent-color); color: var(--accent-color);">
+                                    <i class="bi bi-linkedin me-1"></i> LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Direct FormSubmit Form -->
+                    <div class="col-lg-7">
+                        <div class="contact-form-card">
+                            <h3 class="h4 fw-bold mb-3" style="color: var(--text-primary);">Send a Message</h3>
+                            
+                            <form id="contactForm" action="https://formsubmit.co/ajax/sylvesterng9955@gmail.com" method="POST">
+                                <!-- FormSubmit Configuration Settings -->
+                                <input type="hidden" name="_captcha" value="false">
+                                <input type="text" name="_honey" style="display:none">
+
+                                <div class="row g-3">
+                                    <!-- Name Field -->
+                                    <div class="col-md-6">
+                                        <label for="senderName" class="form-label small text-secondary-custom fw-semibold">Your Name</label>
+                                        <input type="text" class="form-control form-control-custom" id="senderName" name="name" placeholder="e.g. Xin Ling" required>
+                                    </div>
+
+                                    <!-- Email Field -->
+                                    <div class="col-md-6">
+                                        <label for="senderEmail" class="form-label small text-secondary-custom fw-semibold">Your Email</label>
+                                        <input type="email" class="form-control form-control-custom" id="senderEmail" name="email" placeholder="name@company.com" required>
+                                    </div>
+
+                                    <!-- Subject Field -->
+                                    <div class="col-12">
+                                        <label for="msgSubject" class="form-label small text-secondary-custom fw-semibold">Subject</label>
+                                        <input type="text" class="form-control form-control-custom" id="msgSubject" name="_subject" placeholder="Internship Opportunity / Inquiry" required>
+                                    </div>
+
+                                    <!-- Message Field -->
+                                    <div class="col-12">
+                                        <label for="msgBody" class="form-label small text-secondary-custom fw-semibold">Message</label>
+                                        <textarea class="form-control form-control-custom" id="msgBody" name="message" rows="7" placeholder="Hi Sylvester, I would like to discuss..." required></textarea>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" id="submitBtn" class="btn btn-info rounded-pill px-4 py-2 fw-medium w-100 shadow-sm" style="background-color: var(--accent-color); border:none; color: #fff !important;">
+                                            <i class="bi bi-send-fill me-2"></i> Send Message
+                                        </button>
+                                        <!-- Status Feedback Display Area -->
+                                        <div id="form-status" class="mt-3 text-center"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
     </main>
 
@@ -410,187 +1480,142 @@
             themeToggleBtn.addEventListener("click", () => {
                 setTheme(htmlElement.getAttribute("data-theme") === "dark" ? "light" : "dark");
             });
+
             function setTheme(t) {
                 htmlElement.setAttribute("data-theme", t);
                 localStorage.setItem("portfolio-theme", t);
                 themeIcon.className = t === "light" ? "bi bi-sun-fill" : "bi bi-moon-stars-fill";
             }
 
-            // Async Fetch & Engine Parsing System
-            fetch('content.md')
-                .then(res => res.text())
-                .then(text => {
-                    const sections = {};
-                    // FIX: Enhanced split to safely allow potential hyphens/spaces inside md tags
-                    const parts = text.split(/<!--\s*SECTION:\s*([\w\s-]+)\s*-->/);
+            // Navigation Tracking, Scroll-to-Top, and Reveal Observer
+            const topNav = document.getElementById("topNav");
+            const sidebarNav = document.getElementById("sidebarNav");
+            const backToTopBtn = document.getElementById("backToTopBtn");
+            const revealElements = document.querySelectorAll(".reveal-element");
+            const navLinks = document.querySelectorAll(".sidebar-nav .nav-link");
+            const sections = document.querySelectorAll("main section");
+
+            // Scroll-to-top Click Handler
+            backToTopBtn.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+
+            window.addEventListener("scroll", () => {
+                let scrollPosition = window.scrollY;
+
+                // Nav visibility handling
+                if (scrollPosition > 120) {
+                    topNav.classList.add("hidden");
+                    sidebarNav.classList.add("visible");
+                } else {
+                    topNav.classList.remove("hidden");
+                    sidebarNav.classList.remove("visible");
+                }
+
+                // Show / hide back-to-top button after 300px
+                if (scrollPosition > 300) {
+                    backToTopBtn.classList.add("visible");
+                } else {
+                    backToTopBtn.classList.remove("visible");
+                }
+
+                // Active section highlight in sidebar
+                let currentActiveSection = "";
+                sections.forEach(section => {
+                    if (scrollPosition >= (section.offsetTop - section.clientHeight / 2)) {
+                        currentActiveSection = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.toggle("active", link.getAttribute("href").includes(currentActiveSection));
+                });
+            });
+
+            const elementRevealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    entry.target.classList.toggle("active", entry.isIntersecting);
+                });
+            }, { root: null, threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+            revealElements.forEach(element => elementRevealObserver.observe(element));
+
+            const copyEmailBtn = document.getElementById("copyEmailBtn");
+            if (copyEmailBtn) {
+                copyEmailBtn.addEventListener("click", () => {
+                    const email = document.getElementById("contactEmail").innerText.trim();
+                    navigator.clipboard.writeText(email).then(() => {
+                        const copyIcon = document.getElementById("copyIcon");
+                        const copyText = document.getElementById("copyText");
+
+                        copyIcon.className = "bi bi-check2 me-1";
+                        copyText.innerText = "Copied!";
+                        copyEmailBtn.classList.replace("btn-outline-info", "btn-success");
+
+                        setTimeout(() => {
+                            copyIcon.className = "bi bi-clipboard me-1";
+                            copyText.innerText = "Copy";
+                            copyEmailBtn.classList.replace("btn-success", "btn-outline-info");
+                        }, 2000);
+                    });
+                });
+            }
+
+            // --- Form Submission Logic (FormSubmit via AJAX) ---
+            const contactForm = document.getElementById('contactForm');
+            const formStatus = document.getElementById('form-status');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
                     
-                    // FIX: Stopped out-of-bounds evaluation overshoots near the array tip
-                    for (let i = 1; i < parts.length; i += 2) {
-                        const sectionName = parts[i];
-                        const sectionContent = parts[i + 1];
+                    const submitBtn = contactForm.querySelector('#submitBtn');
+                    const originalBtnContent = submitBtn.innerHTML;
+                    
+                    // Show loading spinner
+                    submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Sending...';
+                    submitBtn.disabled = true;
+
+                    // Convert FormData to a standard object for JSON submission
+                    const formData = new FormData(contactForm);
+                    const payload = Object.fromEntries(formData.entries());
+
+                    try {
+                        const response = await fetch(contactForm.action, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        });
+
+                        // Parse the FormSubmit JSON response
+                        const result = await response.json();
+
+                        // Check if FormSubmit actually says success="true"
+                        if (response.ok && (result.success === "true" || result.success === true)) {
+                            formStatus.innerHTML = "<p style='color: var(--accent-success); font-size: 0.9rem;'><i class='bi bi-check-circle-fill me-1'></i> Success! Your message has been sent.</p>";
+                            contactForm.reset();
+                        } else {
+                            // If it fails (e.g. form not activated yet), print FormSubmit's error message
+                            formStatus.innerHTML = `<p style='color: #ef4444; font-size: 0.9rem;'><i class='bi bi-exclamation-circle-fill me-1'></i> ${result.message || "Oops! Something went wrong."}</p>`;
+                        }
+                    } catch (error) {
+                        formStatus.innerHTML = "<p style='color: #ef4444; font-size: 0.9rem;'><i class='bi bi-exclamation-circle-fill me-1'></i> Error connecting to the server. Please email directly.</p>";
+                    } finally {
+                        submitBtn.innerHTML = originalBtnContent;
+                        submitBtn.disabled = false;
                         
-                        // Safely verify both keys and contents exist before trimming
-                        if (sectionName && sectionContent) {
-                            sections[sectionName.trim()] = sectionContent.trim();
-                        }
-                    }
-                    renderPortfolio(sections);
-                })
-                .catch(err => console.error("Could not fetch or read markdown targets:", err));
-
-            function renderPortfolio(data) {
-                // 1. Render Hero Content
-                document.getElementById('md-hero-bio').innerText = data.HERO;
-
-                // 2. Render Education Timeline Elements
-                const eduHtml = marked.parse(data.EDUCATION);
-                const eduTemp = document.createElement('div');
-                eduTemp.innerHTML = eduHtml;
-                const eduTarget = document.getElementById('md-education-target');
-                
-                let currentItem = null;
-                Array.from(eduTemp.children).forEach(el => {
-                    if (el.tagName === 'H3') {
-                        if (currentItem) eduTarget.appendChild(currentItem);
-                        currentItem = document.createElement('div');
-                        currentItem.className = 'timeline-item';
-                        currentItem.innerHTML = `<span class="text-accent small fw-bold">${el.innerText}</span>`;
-                    } else if (currentItem) {
-                        if (el.tagName === 'H4') currentItem.innerHTML += `<h3 class="h4 mt-1 mb-0">${el.innerHTML}</h3>`;
-                        else if (el.tagName === 'H5') currentItem.innerHTML += `<p class="text-secondary-custom mb-2 small">${el.innerHTML}</p>`;
-                        else if (el.tagName === 'UL') {
-                            const txt = el.querySelector('li').innerHTML;
-                            currentItem.innerHTML += `<div class="portfolio-badge mt-1">${txt}</div>`;
-                        }
+                        // Clear message after 5 seconds
+                        setTimeout(() => {
+                            formStatus.innerHTML = '';
+                        }, 5000);
                     }
                 });
-                if (currentItem) eduTarget.appendChild(currentItem);
-
-                // 3. Render Experience Modules
-                const expHtml = marked.parse(data.EXPERIENCE);
-                const expTemp = document.createElement('div');
-                expTemp.innerHTML = expHtml;
-                const expTarget = document.getElementById('md-experience-target');
-
-                let currentExp = null;
-                Array.from(expTemp.children).forEach(el => {
-                    if (el.tagName === 'H3') {
-                        if (currentExp) expTarget.appendChild(wrapInCol(currentExp, 6));
-                        currentExp = document.createElement('div');
-                        currentExp.className = 'custom-card';
-                        currentExp.innerHTML = `<div class="d-flex justify-content-between align-items-start mb-3"><div><h3 class="h4 mb-0">${el.innerText}</h3></div></div>`;
-                    } else if (currentExp) {
-                        if (el.tagName === 'H4') currentExp.querySelector('h3').insertAdjacentHTML('afterend', `<p class="text-accent small mb-0">${el.innerText}</p>`);
-                        else if (el.tagName === 'H5') currentExp.querySelector('.d-flex').insertAdjacentHTML('beforeend', `<span class="text-secondary-custom small">${el.innerText}</span>`);
-                        else if (el.tagName === 'P') currentExp.innerHTML += `<p class="text-secondary-custom small mb-2 fw-semibold text-white-50">${el.innerHTML}</p>`;
-                        else if (el.tagName === 'UL') {
-                            el.className = "text-secondary-custom small ps-3 mb-0";
-                            el.style.styleFloat = "none";
-                            currentExp.appendChild(el);
-                        }
-                    }
-                });
-                if (currentExp) expTarget.appendChild(wrapInCol(currentExp, 6));
-
-                // 4. Render Project Modules
-                const projHtml = marked.parse(data.PROJECTS);
-                const projTemp = document.createElement('div');
-                projTemp.innerHTML = projHtml;
-                const projTarget = document.getElementById('md-projects-target');
-
-                let currentProj = null;
-                Array.from(projTemp.children).forEach(el => {
-                    if (el.tagName === 'H3') {
-                        if (currentProj) projTarget.appendChild(wrapInCol(currentProj, 6));
-                        currentProj = document.createElement('div');
-                        currentProj.className = 'custom-card d-flex flex-column justify-content-between';
-                        currentProj.innerHTML = `<div><div class="text-accent mb-2 fs-4"><i class="bi bi-folder2-open"></i></div><h3 class="h5 mb-2">${el.innerText}</h3></div>`;
-                    } else if (currentProj) {
-                        if (el.tagName === 'P') currentProj.querySelector('h3').insertAdjacentHTML('afterend', `<p class="text-secondary-custom small mb-3">${el.innerHTML}</p>`);
-                        else if (el.tagName === 'UL') {
-                            const tag = el.querySelector('li').innerText;
-                            currentProj.innerHTML += `<div class="portfolio-badge align-self-start mt-2">${tag}</div>`;
-                        }
-                    }
-                });
-                if (currentProj) projTarget.appendChild(wrapInCol(currentProj, 6));
-
-                // 5. Render Core Skills Badges
-                const skillsHtml = marked.parse(data.SKILLS);
-                const skillsTemp = document.createElement('div');
-                skillsTemp.innerHTML = skillsHtml;
-                const skillsTarget = document.getElementById('md-skills-target');
-                skillsTemp.querySelectorAll('li').forEach(li => {
-                    skillsTarget.innerHTML += `<span class="skill-badge">${li.innerText}</span>`;
-                });
-
-                // 6. Render Spoken Languages Array
-                const langHtml = marked.parse(data.LANGUAGES);
-                const langTemp = document.createElement('div');
-                langTemp.innerHTML = langHtml;
-                const langTarget = document.getElementById('md-languages-target');
-                langTemp.querySelectorAll('li').forEach(li => {
-                    const parts = li.innerText.split('|');
-                    const name = parts[0].trim();
-                    const level = parts[1] ? parts[1].trim() : 'Fluent';
-                    const badgeClass = level.includes('Native') || level.includes('Fluent') ? 'bg-info text-dark' : 'bg-secondary';
-                    langTarget.innerHTML += `
-                        <div class="col-6">
-                            <div class="lang-card d-flex justify-content-between align-items-center">
-                                <span class="fw-bold small">${name}</span>
-                                <span class="badge ${badgeClass} font-monospace" style="font-size:0.65rem;">${level}</span>
-                            </div>
-                        </div>`;
-                });
-
-                // Re-initialize scroll animations after layout builds successfully
-                initializeScrollAnimations();
-            }
-
-            function wrapInCol(element, size) {
-                const col = document.createElement('div');
-                col.className = `col-md-${size}`;
-                col.appendChild(element);
-                return col;
-            }
-
-            // Navigation Tracking & Smartphone Splash Reveal Observer Hooks
-            function initializeScrollAnimations() {
-                const topNav = document.getElementById("topNav");
-                const sidebarNav = document.getElementById("sidebarNav");
-                const revealElements = document.querySelectorAll(".reveal-element");
-                const navLinks = document.querySelectorAll(".sidebar-nav .nav-link");
-                const sections = document.querySelectorAll("main section");
-
-                window.addEventListener("scroll", () => {
-                    let scrollPosition = window.scrollY;
-                    if (scrollPosition > 120) {
-                        topNav.classList.add("hidden");
-                        sidebarNav.classList.add("visible");
-                    } else {
-                        topNav.classList.remove("hidden");
-                        sidebarNav.classList.remove("visible");
-                    }
-
-                    let currentActiveSection = "";
-                    sections.forEach(section => {
-                        if (scrollPosition >= (section.offsetTop - section.clientHeight / 2)) {
-                            currentActiveSection = section.getAttribute("id");
-                        }
-                    });
-
-                    navLinks.forEach(link => {
-                        link.classList.toggle("active", link.getAttribute("href").includes(currentActiveSection));
-                    });
-                });
-
-                const elementRevealObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        entry.target.classList.toggle("active", entry.isIntersecting);
-                    });
-                }, { root: null, threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-
-                revealElements.forEach(element => elementRevealObserver.observe(element));
             }
         });
     </script>
