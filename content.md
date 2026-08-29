@@ -2,7 +2,12 @@
 I am a passionate Software Engineer with a solid foundation in Python, Java, and full-stack web development. I have hands-on experience through academic projects in building web applications, databases, and structural application layouts with dynamic, intuitive user interfaces.
 
 <!-- SECTION: EDUCATION -->
-### 2023 - Present
+### 2026 - Present
+#### Degree in Computer Science
+##### Asia Pacific University (APU)
+* Pending
+
+### 2023 - 2025
 #### Diploma in ICT (Software Engineering)
 ##### Asia Pacific University (APU)
 * CGPA: 3.86 / 4.0
@@ -59,13 +64,15 @@ Developed a line-based administrative environment built within terminal environm
 
 <!-- SECTION: SKILLS -->
 * Web Development (HTML/CSS/JS/PHP)
-* Object Oriented Programming
+* Laravel
+* Object Oriented Programming (Java)
 * Database Management (phpMyAdmin)
 * UI/UX Design
 * Wireframing
 * Process Flow Optimization
 * Digital Thinking
 * Structured Problem Solving
+* Linux
 
 <!-- SECTION: LANGUAGES -->
 * Chinese | Native
